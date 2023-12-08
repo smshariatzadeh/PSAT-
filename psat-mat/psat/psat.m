@@ -37,6 +37,7 @@ end
 %Author:    Federico Milano
 %Date:      11-Nov-2002
 %Update:    06-Mar-2007
+%Update:    09-Jun-2023 by smshariatzadeh@yahoo.com
 %
 %E-mail:    federico.milano@ucd.ie
 %Web-site:  faraday1.ucd.ie/psat.html
@@ -55,12 +56,12 @@ if ~exist('OCTAVE_VERSION')
   end
 end
 
-psatver = '2.1.11';
-psatdate = 'August 17, 2019';
+psatver = '2.1.11+';
+psatdate = 'August 17, 2023';
 
 failed = 0;
 disp(' ')
-disp('                        < P S A T >')
+disp('                        < P S A T +>')
 disp('          Copyright (C) 2002-2019 Federico Milano')
 disp([blanks(30-floor(5+length(psatver)/2)),'Version ',psatver])
 disp([blanks(30-ceil(length(psatdate)/2)),psatdate])
