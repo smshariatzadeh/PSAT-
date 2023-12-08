@@ -3,14 +3,16 @@ function fig = fm_tviewer()
 %
 % HDL = FM_TVIEWER()
 %
-%Author:    Federico Milano
-%Date:      11-Nov-2002
-%Version:   1.0.0
+% Author:    Federico Milano
+% Date:      11-Nov-2002
+% Update:    19-Jul-2023 by smshariatzadeh@yahoo.com
+% Version:   1.0.0+
 %
-%E-mail:    federico.milano@ucd.ie
-%Web-site:  faraday1.ucd.ie/psat.html
+% E-mail:    federico.milano@ucd.ie
+% Web-site:  faraday1.ucd.ie/psat.html
 %
 % Copyright (C) 2002-2019 Federico Milano
+
 
 global Settings Theme Fig
 
@@ -37,12 +39,21 @@ linux_tv = {'cat';
             'gless';
             'kedit';
             'kwrite'};
-win_tv   = {'type';
+%win_tv   = {'type';
+%            'notepad';
+%            'write';
+%            'uedit32';
+%            'explorer';
+%            'firefox'};
+
+win_tv   = {'edit'; % modified by S.M.SHariatzadeh for win matlab editor compatibility
+            'type';
             'notepad';
             'write';
             'uedit32';
             'explorer';
             'firefox'};
+
 
 h0 = figure('Color',Theme.color01, ...
             'Units', 'normalized', ...
@@ -218,7 +229,8 @@ switch computer
     a = 1;
   end
   set(h2,'Value',a)
- case 'PCWIN',
+% case 'PCWIN',    %old Line
+ case {'PCWIN' , 'PCWIN64' }  % modified by S.M.SHariatzadeh for win64 compatibility
   h = [h1, h11, h2, h12];
   for i = 1:length(win_tv)
     if findstr(Settings.tviewer,win_tv{i}),
