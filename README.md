@@ -22,6 +22,9 @@ Simplest way to contribute is to create as many examples as possible, regardless
 # How to setup
 
 1- Download the software package from GitHub. (https://github.com/smshariatzadeh/PSAT)
-2- Unzip the package on the computer.
+
+2- Unzip the package on the computer
+
 3- Add the main folder and all subfolders to the path of the matlab software
+
 4- In the matlab command window, type PSAT and press enter
