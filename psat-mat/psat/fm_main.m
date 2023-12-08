@@ -10,7 +10,8 @@ function fig = fm_main(varargin)
 %Update:    10-Feb-2003
 %Update:    27-Feb-2003
 %Update:    29-Jul-2003
-%Version:   1.0.3
+%Update:    19-Jul-2023 by smshariatzadeh@yahoo.com
+%Version:   1.0.3+
 %
 %E-mail:    federico.milano@ucd.ie
 %Web-site:  faraday1.ucd.ie/psat.html
