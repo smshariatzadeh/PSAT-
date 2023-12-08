@@ -3,7 +3,10 @@
 %  Copyright (c) 1998  by H. Saadat
 %
 
-% Update By s.m. Shariatzadeh For Psat Data Format 
+% Update By s.m. Shariatzadeh (by smshariatzadeh@yahoo.com) For Psat Data Format 
+% Date:    19-Jul-2023 
+% Version:   1.0.0+
+
 
 function [Zbus] = zbuild(linedata)
 
