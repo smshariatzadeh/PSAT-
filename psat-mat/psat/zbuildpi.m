@@ -1,15 +1,54 @@
+%
 % This program forms the complex bus impedance matrix by the method
 % of building algorithm.  Bus zero is taken as reference.
 % This program is compatible with power flow data.
-%  Copyright (C) 1998  by H. Saadat.
-
+%
+% Copyright (C) 1998  by H. Saadat.
+% Update:    19-Jul-2023 by smshariatzadeh@yahoo.com
+% Version:   1.0.2+
+%
 function [Zbus, linedata] = zbuildpi(linedata, gendata, yload)
 
+% INPUT:
+%
+% linedata:
+% linedata is consistent with the data required for the
+% power flow solution. Columns 1 and 2 are the line bus numbers. 
+% Columns 3 through 5 contain line resistance, reactance, and
+% one-half of the total line charging susceptance in per unit on
+% the specified MVA base. The last column is for the transformer
+% tap setting
+%
+% gendata:
+%
+% The generator reactances are not included in the linedata of
+% the power flow program and must be specified separately as
+% required by the gendata in the second argument.
+% gendata is an ng x 4 matrix, where each row contains
+% bus 0, generator bus number, resistance and reactance.
+%
+% yload:
+%
+% % The last argument, yload is optional. 
+% This is a two-column matrix containing bus number and the complex
+% load admittance.
+
+
+
 % gendata generator data syn.con
-ng = length(gendata(:,1));
-nlg = gendata(:,1);
-nrg = zeros(size(gendata(:,1)));
-zg = gendata(:,7) + j*gendata(:,6);
+if isempty(gendata) 
+    ng = 0;
+    nlg = 0;
+    nrg = 0;
+    zg = 0;
+else
+    ng = length(gendata(:,1));
+    nlg = gendata(:,1);
+    nrg = zeros(size(gendata(:,1)));
+    zg = gendata(:,7) + j*gendata(:,6);
+end 
+
+
 
 nl = linedata(:,1); 
 nr = linedata(:,2); 
@@ -38,10 +77,10 @@ for n = 1:nbus
   end
 end
 
-if exist('yload') == 1
-  yload = yload.';
-  yc = yc + yload;
-end
+% % % % % % % if exist('yload') == 1
+% % % % % % %   yload = yload.';
+% % % % % % %   yc = yc + yload;
+% % % % % % % end
 
 m = 0;
 havecc = 0; % have cc ? 
@@ -84,13 +123,15 @@ for I = 1:nbr
     elseif nr(I) == 0
       n = nl(I);
     end
-    if abs(Zbus(n, n)) == 0 
-      Zbus(n,n) = ZB(I);
-      tree = tree+1; %%new
-    else 
-      Zbus(n,n) = Zbus(n,n)*ZB(I)/(Zbus(n,n) + ZB(I));
-    end
-    ntree(I) = 2;
+    if n>0 
+        if abs(Zbus(n, n)) == 0 
+          Zbus(n,n) = ZB(I);
+          tree = tree+1; %%new
+        else 
+          Zbus(n,n) = Zbus(n,n)*ZB(I)/(Zbus(n,n) + ZB(I));
+        end
+        ntree(I) = 2;
+    end    
   end
 end
 
