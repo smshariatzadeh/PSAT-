@@ -20,7 +20,8 @@ function fm_simrep(varargin)
 %
 %Author:    Federico Milano
 %Date:      11-Nov-2002
-%Version:   1.0.0
+%Update:    19-Jul-2023 by smshariatzadeh@yahoo.com
+%Version:   1.0.0+
 %
 %E-mail:    federico.milano@ucd.ie
 %Web-site:  faraday1.ucd.ie/psat.html
@@ -51,11 +52,13 @@ if isempty(File.data) && type,
   fm_disp('No loaded system is present at the moment.',2),
   return
 end
-if isempty(strfind(File.data,'(mdl)')) && type
+%if isempty(strfind(File.data,'(mdl)')) && type    %old code
+if isempty(strfind(File.data,'(mdl)')) && isempty(strfind(File.data,'(slx)')) && type %change by S.M. Shariatzadeh
   fm_disp('The actual data file is not generated from a Simulink model.',2),
   return
 end
-if ~Settings.init && ~strcmp(flag,{'mdl2eps','ViewModel','DrawModel'}) & type
+%if ~Settings.init && ~strcmp(flag,{'mdl2eps','ViewModel','DrawModel'}) & type  %old code
+if ~Settings.init && ~any(strcmp(flag,{'mdl2eps','ViewModel','DrawModel'})>0) && type   % modified by S. Majid SHariatzade
   fm_disp('Perform Power Flow before using this utility.',2),
   return
 end
